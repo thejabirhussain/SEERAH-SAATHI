@@ -1,0 +1,100 @@
+# Seerah Saathi Journey
+
+A React-based web application built with modern technologies to provide an interactive Islamic learning experience.
+
+## 🚀 Tech Stack
+
+- [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
+- [React](https://react.dev/) with [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- [shadcn/ui](https://ui.shadcn.com/) for UI components
+- [Bun](https://bun.sh/) for package management
+
+## 📁 Project Structure
+
+```
+├── src/
+│   ├── assets/         # Static assets (images, SVGs)
+│   ├── components/     # React components
+│   ├── hooks/         # Custom React hooks
+│   ├── lib/           # Utility functions and shared code
+│   ├── pages/         # Page components
+│   ├── App.tsx        # Main application component
+│   └── main.tsx       # Application entry point
+├── public/            # Public static files
+├── components.json    # shadcn/ui configuration
+├── tailwind.config.ts # Tailwind CSS configuration
+└── vite.config.ts     # Vite configuration
+```
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js (Latest LTS version recommended)
+- npm or Bun package manager
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or with Bun
+bun install
+```
+
+3. Start the development server:
+```bash
+npm run dev
+# or with Bun
+bun dev
+```
+
+## 🔧 Configuration
+
+- **TypeScript**: Configuration in `tsconfig.json`
+- **Tailwind**: Customization in `tailwind.config.ts`
+- **Components**: Path aliases and UI settings in `components.json`
+
+## 📦 Project Aliases
+
+The following path aliases are configured in `components.json`:
+
+- `@/components` - Component directory
+- `@/lib/utils` - Utility functions
+- `@/components/ui` - UI components
+- `@/lib` - Library code
+- `@/hooks` - Custom hooks
+
+## 🔨 Development
+
+The project uses Vite as the build tool, providing:
+- Fast Hot Module Replacement (HMR)
+- TypeScript support out of the box
+- Optimized production builds
+
+## 🎨 Styling
+
+- Utilizes Tailwind CSS for utility-first styling
+- CSS variables support enabled through shadcn/ui
+- Base styling configured in `src/index.css`
+
+## 📚 Additional Resources
+
+- [Vite Documentation](https://vitejs.dev/guide/)
+- [React Documentation](https://react.dev/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [shadcn/ui Documentation](https://ui.shadcn.com/docs)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull
