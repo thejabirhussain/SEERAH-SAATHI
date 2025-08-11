@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export const Header = () => {
   return (
     <motion.div
-      className="bg-gradient-to-r from-primary to-accent text-primary-foreground py-4 px-6 text-center text-sm font-medium relative overflow-hidden"
+      className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white py-4 px-6 text-center text-sm font-medium relative overflow-hidden"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -12,7 +12,7 @@ export const Header = () => {
     >
       {/* Animated background */}
       <motion.div
-        className="absolute inset-0 opacity-15"
+        className="absolute inset-0 opacity-10"
         animate={{ x: [0, 60], y: [0, 60] }}
         transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
       >

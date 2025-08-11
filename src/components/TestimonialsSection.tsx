@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ChevronLeft, ChevronRight, Star, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star, Play } from 'lucide-react';
 import { motion } from "framer-motion";
 
 const testimonials = [
@@ -64,7 +64,7 @@ export const TestimonialsSection = () => {
 
   return (
     <motion.section
-      className="py-24 bg-gradient-to-b from-muted/30 to-background"
+      className="py-24 bg-gradient-to-br from-blue-50 via-purple-50 to-blue-100"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -76,17 +76,20 @@ export const TestimonialsSection = () => {
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold mb-6 text-gradient-primary">
+          <h2 
+            id="testimonials-heading" 
+            className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900"
+          >
             Transformed Lives, Lasting Memories
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Listen to the inspiring stories of those who have experienced the life-changing Seerah Saathi journey.
           </p>
         </div>
 
         {/* Video Testimonial Carousel */}
         <div className="max-w-4xl mx-auto">
-          <Card className="card-elevated overflow-hidden">
+          <Card className="bg-white/80 backdrop-blur-sm border-blue-200/50 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden">
             <CardContent className="p-0">
               {/* Video Placeholder */}
               <motion.div
@@ -95,9 +98,9 @@ export const TestimonialsSection = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="aspect-video bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
+                <div className="aspect-video bg-gradient-to-br from-blue-100/50 to-blue-200/30 flex items-center justify-center">
                   <motion.button
-                    className="flex items-center justify-center w-20 h-20 bg-gradient-to-r from-primary to-accent rounded-full text-white hover:scale-110 transition-transform shadow-lg"
+                    className="flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full text-white hover:scale-110 transition-transform shadow-lg"
                     whileHover={{ scale: 1.15, rotate: 360 }}
                     transition={{ duration: 0.4 }}
                     aria-label="Play testimonial video"
@@ -105,21 +108,21 @@ export const TestimonialsSection = () => {
                     <Play className="w-8 h-8 ml-1" />
                   </motion.button>
                 </div>
-
+                
                 {/* Navigation arrows */}
                 <button
                   onClick={prevTestimonial}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-blue-500"
                   aria-label="Previous testimonial"
                 >
-                  <ChevronLeft className="w-6 h-6 text-primary" />
+                  <ChevronLeft className="w-6 h-6 text-blue-700" />
                 </button>
                 <button
                   onClick={nextTestimonial}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-blue-500"
                   aria-label="Next testimonial"
                 >
-                  <ChevronRight className="w-6 h-6 text-primary" />
+                  <ChevronRight className="w-6 h-6 text-blue-700" />
                 </button>
               </motion.div>
 
@@ -135,24 +138,24 @@ export const TestimonialsSection = () => {
                   {/* Stars */}
                   <div className="flex justify-center mb-4">
                     {[...Array(currentTestimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-secondary fill-current" />
+                      <Star key={i} className="w-5 h-5 text-blue-600 fill-current" />
                     ))}
                   </div>
-
+                  
                   {/* Quote */}
-                  <blockquote className="text-lg text-muted-foreground mb-6 italic leading-relaxed">
+                  <blockquote className="text-lg text-gray-600 mb-6 italic leading-relaxed">
                     "{currentTestimonial.content}"
                   </blockquote>
-
+                  
                   {/* Author */}
                   <div>
-                    <h4 className="font-bold text-foreground text-lg">
+                    <h4 className="font-bold text-blue-900 text-lg">
                       {currentTestimonial.name}
                     </h4>
-                    <p className="text-primary font-medium">
+                    <p className="text-blue-700 font-medium">
                       {currentTestimonial.position}
                     </p>
-                    <p className="text-muted-foreground text-sm">
+                    <p className="text-gray-600 text-sm">
                       {currentTestimonial.location}
                     </p>
                   </div>
@@ -167,50 +170,13 @@ export const TestimonialsSection = () => {
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all ${
+                className={`h-3 rounded-full transition-all ${
                   index === currentIndex
-                    ? "bg-gradient-to-r from-primary to-accent w-8"
-                    : "bg-border hover:bg-primary/50"
+                    ? "bg-gradient-to-r from-blue-600 to-blue-700 w-8"
+                    : "bg-blue-200 hover:bg-blue-300 w-3"
                 }`}
                 aria-label={`View testimonial ${index + 1}`}
               />
-            ))}
-          </div>
-
-          {/* All Testimonials Preview */}
-          <div className="grid md:grid-cols-2 gap-6 mt-16">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.id}
-                className={`card-gradient hover-lift cursor-pointer transition-all ${
-                  index === currentIndex ? "ring-2 ring-primary" : ""
-                }`}
-                onClick={() => setCurrentIndex(index)}
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === "Enter" && setCurrentIndex(index)}
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center text-white font-bold">
-                      {testimonial.name.charAt(0)}
-                    </div>
-                    <div className="flex-1">
-                      <h5 className="font-semibold text-foreground mb-1">
-                        {testimonial.name}
-                      </h5>
-                      <p className="text-sm text-primary mb-2">
-                        {testimonial.position}
-                      </p>
-                      <p className="text-sm text-muted-foreground line-clamp-3">
-                        {testimonial.content}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </motion.div>
             ))}
           </div>
         </div>
