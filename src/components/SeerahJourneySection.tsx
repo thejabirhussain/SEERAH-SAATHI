@@ -2,249 +2,297 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { EmailModal } from "./EmailModal"
-import { Calendar, Compass, Heart, Sparkles } from "lucide-react" // Added Compass, Heart, Sparkles
-import mosqueImage from "@/assets/mosque-architecture.jpg"
-import { motion } from "framer-motion"
+import { ChevronLeft, ChevronRight, MapPin, Calendar, Users } from "lucide-react"
 
-const journeyHighlights = [
+const journeyCards = [
   {
-    title: "Discover", // Changed title
-    description: "Uncover the profound history and spiritual significance of the sacred journey.", // Updated description
-    icon: Compass, // Changed icon
-    // Removed days: "Days 1-4",
+    id: 1,
+    title: "Foundation & Early Life",
+    days: "Days 1-3",
+    color: "#0040c1",
+    gradient: "from-blue-600 to-blue-700",
+    icon: <MapPin className="w-5 h-5" />,
+    content: [
+      {
+        day: 1,
+        title: "Arrival & Umrah",
+        activities: ["Arrive in Makkah & Perform Umrah", "Group orientation", "Reflection circle"],
+      },
+      {
+        day: 2,
+        title: "Seerah Foundations",
+        activities: ["Introduction to Seerah", "Quraysh lineage & Zamzam", "Birth of Prophet ﷺ", "Key site visits"],
+      },
+      {
+        day: 3,
+        title: "Early Years",
+        activities: ["Youth & Syria voyage", "Marriage to Khadijah (RA)", "First Revelation", "Visit Mt Hira"],
+      },
+    ],
   },
   {
-    title: "Reflect", // Changed title
-    description: "Engage in deep contemplation and spiritual growth in blessed locations.", // Updated description
-    icon: Heart, // Changed icon
-    // Removed days: "Days 5-8",
+    id: 2,
+    title: "The Call & Challenges",
+    days: "Days 4-6",
+    color: "#2563eb",
+    gradient: "from-blue-500 to-blue-600",
+    icon: <Users className="w-5 h-5" />,
+    content: [
+      {
+        day: 4,
+        title: "First Call",
+        activities: ["House of Arqam", "Early believers", "Opposition begins", "Group reflection"],
+      },
+      {
+        day: 5,
+        title: "Hardships",
+        activities: ["Migration to Abyssinia", "The boycott", "Year of Sadness", "Journey to Taif"],
+      },
+      {
+        day: 6,
+        title: "Turning Point",
+        activities: ["Bay'ah of Aqabah", "Night of Migration", "Mt Thawr visit", "Isra wal Miraj"],
+      },
+    ],
   },
   {
-    title: "Transform", // Changed title
-    description: "Experience a personal spiritual metamorphosis through this unique pilgrimage.", // Updated description
-    icon: Sparkles, // Changed icon
-    // Removed days: "Days 9-12",
+    id: 3,
+    title: "Migration & Growth",
+    days: "Days 7-9",
+    color: "#1d4ed8",
+    gradient: "from-blue-500 to-blue-700",
+    icon: <Calendar className="w-5 h-5" />,
+    content: [
+      {
+        day: 7,
+        title: "Migration Journey",
+        activities: ["Journey to Madinah", "Arrival at Quba", "Visit Masjid Quba", "Hijrah reflection"],
+      },
+      {
+        day: 8,
+        title: "New Life in Madinah",
+        activities: ["Masjid an-Nabawi visit", "Brotherhood pact", "Madinah Charter", "Community building"],
+      },
+      {
+        day: 9,
+        title: "Trials of Faith",
+        activities: ["Battles of Badr & Uhud", "Masjid Qiblatain", "Personal resilience", "Faith strengthening"],
+      },
+    ],
   },
-]
-
-const seerahChapters = [
-  "Birth and Early Life",
-  "The First Revelation",
-  "The Meccan Period",
-  "The Hijra (Migration)",
-  "The Medinan Period",
-  "The Conquest of Makkah",
-  "The Farewell Pilgrimage",
-  "Legacy and Teachings",
+  {
+    id: 4,
+    title: "Victory & Legacy",
+    days: "Days 10-12",
+    color: "#679aff",
+    gradient: "from-blue-400 to-blue-600",
+    icon: <MapPin className="w-5 h-5" />,
+    content: [
+      {
+        day: 10,
+        title: "Victory & Humility",
+        activities: ["Victory of Makkah", "Letters to kings", "Umrah of Prophet ﷺ", "Humility reflection"],
+      },
+      {
+        day: 11,
+        title: "Final Phase",
+        activities: ["Farewell Hajj", "Final teachings", "Passing of Prophet ﷺ", "Abu Bakr (RA) as Caliph"],
+      },
+      {
+        day: 12,
+        title: "Reflection & Departure",
+        activities: ["Seerah reflections", "Personal pledge", "Certification", "Departure"],
+      },
+    ],
+  },
 ]
 
 export const SeerahJourneySection = () => {
-  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false)
+  const [currentCardIndex, setCurrentCardIndex] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  const goToPrevious = () => {
+    if (isAnimating) return
+    setIsAnimating(true)
+    setCurrentCardIndex((prev) => (prev === 0 ? journeyCards.length - 1 : prev - 1))
+    setTimeout(() => setIsAnimating(false), 500)
   }
 
-  return (
-    <>
-      <motion.section
-        id="chapters"
-        className="py-24 bg-gradient-to-br from-blue-50 via-purple-50 to-blue-100 relative overflow-hidden"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        aria-labelledby="journey-heading"
-      >
-        {/* Background pattern */}
-        <motion.div
-          className="absolute inset-0 opacity-5"
-          animate={{ scale: [1, 1.02, 1] }}
-          transition={{ repeat: Number.POSITIVE_INFINITY, duration: 5 }}
-        >
-          <div
-            className="w-full h-full bg-repeat"
-            style={{
-              backgroundImage: `url(data:image/svg+xml,${encodeURIComponent('<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fillRule="evenodd"><g fill="#1d4ed8" fillOpacity="0.1"><path d="M30 30l15-15v30h-30z"/></g></svg>')})`,
-              backgroundSize: "60px 60px",
-            }}
-          ></div>
-        </motion.div>
+  const goToNext = () => {
+    if (isAnimating) return
+    setIsAnimating(true)
+    setCurrentCardIndex((prev) => (prev === journeyCards.length - 1 ? 0 : prev + 1))
+    setTimeout(() => setIsAnimating(false), 500)
+  }
 
-        <div className="container mx-auto px-6 relative z-10">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <h2
-              id="journey-heading"
-              className="text-3xl md:text-5xl font-bold mb-6"
+  const goToCard = (index: number) => {
+    if (isAnimating || index === currentCardIndex) return
+    setIsAnimating(true)
+    setCurrentCardIndex(index)
+    setTimeout(() => setIsAnimating(false), 500)
+  }
+
+  const currentCard = journeyCards[currentCardIndex]
+
+  return (
+    <section id="chapters" className="py-4 sm:py-6 lg:py-7 bg-gradient-to-br from-blue-50 via-purple-50 to-blue-100">
+      {/* HEIGHT CONTROL: Change py-7 to py-6 or py-8 to adjust overall section height */}
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-4 sm:mb-6 lg:mb-7">
+          {/* HEIGHT CONTROL: Change mb-7 to mb-6 or mb-8 to adjust header spacing */}
+          <h1
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2"
+            style={{
+              fontFamily: "Outfit, sans-serif",
+              WebkitTextFillColor: "transparent",
+              backgroundImage: "linear-gradient(74deg, #0040c1, #679aff)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              fontWeight: 800,
+            }}
+          >
+            Soulful Seerah
+          </h1>
+          <p className="text-sm sm:text-base lg:text-lg text-blue-700">12-Day Transformational Umrah Journey</p>
+          {/* HEIGHT CONTROL: Change mb-7 to mb-6 or mb-8 to adjust header spacing */}
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-1 sm:gap-2 mb-4 sm:mb-5 lg:mb-6 px-2">
+          {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+          {journeyCards.map((card, index) => (
+            <button
+              key={card.id}
+              onClick={() => goToCard(index)}
+              disabled={isAnimating}
+              className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 disabled:cursor-not-allowed ${
+                index === currentCardIndex
+                  ? "text-white shadow-lg scale-105"
+                  : "text-blue-700 bg-white hover:bg-blue-50 shadow-md border border-blue-200"
+              }`}
               style={{
-                fontFamily: "Outfit, sans-serif",
-                fontSize: "clamp(32px, 6vw, 48px)",
-                color: "var(--black)",
-                textTransform: "capitalize",
-                wordBreak: "normal",
-                overflowWrap: "normal",
-                WebkitTextFillColor: "transparent",
-                mixBlendMode: "normal",
-                backgroundImage: "linear-gradient(130deg, #0040c1, #679aff)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                marginTop: 0,
-                marginBottom: "1.5rem",
-                lineHeight:'1.5'
+                backgroundColor: index === currentCardIndex ? card.color : undefined,
               }}
             >
-              More than a trip — a Seerah journey <br /> for the heart and mind
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Experience the complete life story of Prophet Muhammad (ﷺ) through carefully curated chapters and sacred
-              locations.
-            </p>
-          </div>
+              {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+              <span className="hidden sm:inline">{card.days}</span>
+              <span className="sm:hidden">{card.id}</span>
+              {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+            </button>
+          ))}
+        </div>
 
-          {/* Journey Highlights */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {journeyHighlights.map((highlight, index) => (
-              <motion.div
-                key={index}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <Card className="bg-white/80 backdrop-blur-sm border-blue-200/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-center">
-                  <CardHeader>
-                    <motion.div
-                      className="mx-auto w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full flex items-center justify-center mb-4"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <highlight.icon className="w-8 h-8 text-white" />
-                    </motion.div>
-                    <CardTitle className="text-xl text-blue-900">{highlight.title}</CardTitle>
-                    {/* Removed the div for highlight.days */}
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600">{highlight.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Seerah Chapters and Map View */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Seerah Chapters */}
-            <div>
-              <h3
-                className="text-3xl font-bold mb-8"
-                style={{
-                  fontFamily: "Outfit, sans-serif",
-                  fontSize: "clamp(28px, 5vw, 42px)",
-                  color: "var(--black)",
-                  textTransform: "capitalize",
-                  wordBreak: "normal",
-                  overflowWrap: "normal",
-                  WebkitTextFillColor: "transparent",
-                  mixBlendMode: "normal",
-                  backgroundImage: "linear-gradient(74deg, #0040c1, #679aff)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  marginTop: 0,
-                  marginBottom: "2rem",
-                }}
-              >
-                Seerah Chapter Cards
-              </h3>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {seerahChapters.map((chapter, index) => (
-                  <motion.div
-                    key={index}
-                    className="p-6 bg-white/80 backdrop-blur-sm border border-blue-200/50 rounded-lg shadow-md hover:shadow-lg hover:bg-blue-50/50 transition-all duration-300 cursor-pointer group"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => e.key === "Enter" && alert(`Selected: ${chapter}`)}
-                  >
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full flex items-center justify-center text-white text-sm font-bold">
-                        {index + 1}
-                      </div>
-                      <span className="font-medium text-blue-900 group-hover:text-blue-700 transition-colors">
-                        {chapter}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
+        <div className="max-w-6xl mx-auto mb-4 sm:mb-5 lg:mb-6">
+          {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+          <div
+            className={`bg-gradient-to-br ${currentCard.gradient} rounded-lg sm:rounded-xl shadow-xl overflow-hidden transition-all duration-500 ${isAnimating ? "scale-95 opacity-80" : "scale-100 opacity-100"}`}
+          >
+            <div className="bg-white/10 backdrop-blur-sm p-3 sm:p-4 lg:p-6 text-white">
+              {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
+                {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-white/20 rounded-full">{currentCard.icon}</div>
+                  <div>
+                    <h2 className="text-lg sm:text-xl lg:text-2xl font-bold">{currentCard.title}</h2>
+                    {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+                    <p className="text-xs sm:text-sm opacity-90">{currentCard.days}</p>
+                  </div>
+                </div>
+                <div className="text-left sm:text-right">
+                  {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+                  <p className="text-xs opacity-75">Phase</p>
+                  <p className="text-base sm:text-lg font-bold">{currentCard.id}/4</p>
+                </div>
               </div>
             </div>
 
-            {/* Map View */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h3
-                className="text-3xl font-bold mb-8"
-                style={{
-                  fontFamily: "Outfit, sans-serif",
-                  fontSize: "clamp(28px, 5vw, 42px)",
-                  color: "var(--black)",
-                  textTransform: "capitalize",
-                  wordBreak: "normal",
-                  overflowWrap: "normal",
-                  WebkitTextFillColor: "transparent",
-                  mixBlendMode: "normal",
-                  backgroundImage: "linear-gradient(74deg, #0040c1, #679aff)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  marginTop: 0,
-                  marginBottom: "2rem",
-                }}
-              >
-                Map View of the Journey
-              </h3>
-              <div className="relative rounded-2xl overflow-hidden shadow-xl border-4 border-white/80">
-                <motion.img
-                  src={mosqueImage}
-                  alt="Journey Map"
-                  className="w-full h-80 object-cover"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.4 }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-800/80 to-transparent flex items-end">
-                  <div className="p-6 text-white">
-                    <h4 className="text-xl font-bold mb-2">Sacred Journey Route</h4>
-                    <p className="text-white/90">
-                      Follow the blessed path through Makkah, Madinah, and historical sites
-                    </p>
+            <div className="bg-white p-3 sm:p-4 lg:p-6">
+              {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+                {currentCard.content.map((dayContent, index) => (
+                  <div
+                    key={dayContent.day}
+                    className="bg-gray-50 rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow duration-300"
+                  >
+                    {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+                    <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                      <div
+                        className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-white font-bold text-xs sm:text-sm"
+                        style={{ backgroundColor: currentCard.color }}
+                      >
+                        {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+                        {dayContent.day}
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-gray-800 text-sm sm:text-base">{dayContent.title}</h3>
+                        {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+                        <p className="text-xs text-gray-500">Day {dayContent.day}</p>
+                      </div>
+                    </div>
+                    <ul className="space-y-1 sm:space-y-2">
+                      {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+                      {dayContent.activities.map((activity, actIndex) => (
+                        <li key={actIndex} className="text-gray-700 text-xs sm:text-sm flex items-start gap-2">
+                          {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+                          <div className="w-1 h-1 rounded-full bg-gray-400 mt-1.5 sm:mt-2 flex-shrink-0"></div>
+                          <span>{activity}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
+                ))}
               </div>
-            </motion.div>
-          </div>
-
-          {/* CTA */}
-          <div className="text-center mt-16">
-            <Button
-              onClick={() => setIsEmailModalOpen(true)}
-              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-              aria-label="Start your journey"
-            >
-              <Calendar className="w-5 h-5 mr-2" />
-              Start Your Journey
-            </Button>
+            </div>
           </div>
         </div>
-      </motion.section>
 
-      <EmailModal isOpen={isEmailModalOpen} onClose={() => setIsEmailModalOpen(false)} />
-    </>
+        <div className="max-w-6xl mx-auto">
+          {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+          <div className="bg-white rounded-lg shadow-lg p-3 sm:p-4">
+            {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+            <div className="flex items-center justify-between gap-2">
+              <Button
+                onClick={goToPrevious}
+                disabled={isAnimating}
+                className="flex items-center gap-1 sm:gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-2 sm:px-4 py-2 text-xs sm:text-sm disabled:opacity-50"
+              >
+                {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+                <ChevronLeft className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">Previous</span>
+                <span className="sm:hidden">Prev</span>
+                {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+              </Button>
+
+              <div className="flex gap-1 sm:gap-2">
+                {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+                {journeyCards.map((card, index) => (
+                  <div
+                    key={card.id}
+                    className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ${
+                      index === currentCardIndex ? "scale-125" : "scale-100"
+                    }`}
+                    style={{
+                      backgroundColor: index <= currentCardIndex ? card.color : "#d1d5db",
+                    }}
+                  />
+                ))}
+              </div>
+
+              <Button
+                onClick={goToNext}
+                disabled={isAnimating}
+                className="flex items-center gap-1 sm:gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-2 sm:px-4 py-2 text-xs sm:text-sm disabled:opacity-50"
+              >
+                {/* HEIGHT CONTROL: Change mb-5 to mb-4 or mb-6 to adjust spacing */}
+                <span className="hidden sm:inline">Next</span>
+                <span className="sm:hidden">Next</span>
+                <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }

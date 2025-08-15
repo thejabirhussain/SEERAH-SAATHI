@@ -8,8 +8,6 @@ import { EmailModal } from "./EmailModal"
 import { TimelineModal } from "./TimelineModal"
 import { Heart, BookOpen, Users, Play, MapPin, Calendar } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-
-// Import your images from assets folder
 import reflectImage from "@/assets/macca-image-1.jpg"
 import reliveImage from "@/assets/hero-kaaba.jpg"
 import rejoiceImage from "@/assets/arafath-mount.jpg"
@@ -40,7 +38,7 @@ const timelineItems = [
       "Personal spiritual guidance",
       "Contemplative walks in historic locations",
     ],
-    image: reflectImage, // Use imported image
+    image: reflectImage,
     testimonial: {
       text: "The reflection sessions completely transformed my understanding of the Prophet's (ﷺ) character. I felt a spiritual awakening that I carry with me every day.",
       author: "Amina Hassan",
@@ -72,7 +70,7 @@ const timelineItems = [
       "Expert historian guides",
       "Authentic historical experiences",
     ],
-    image: reliveImage, // Use imported image
+    image: reliveImage,
     testimonial: {
       text: "Standing in the Cave of Thawr where the Prophet (ﷺ) hid was the most moving experience of my life. You can feel the history in every stone.",
       author: "Omar Al-Rashid",
@@ -104,7 +102,7 @@ const timelineItems = [
       "Shared spiritual experiences",
       "Ongoing community support",
     ],
-    image: rejoiceImage, // Use imported image
+    image: rejoiceImage,
     testimonial: {
       text: "The bonds I formed with my fellow travelers are unbreakable. We continue to support each other's spiritual journey even after returning home.",
       author: "Fatima Rodriguez",
@@ -143,22 +141,22 @@ export const WhyJoinSection = () => {
     <>
       <motion.section
         id="about"
-        className="py-24 bg-gradient-to-br from-blue-50 via-purple-50 to-blue-100 overflow-hidden"
+        className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 bg-gradient-to-br from-blue-50 via-purple-50 to-blue-100 overflow-hidden"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={containerVariants}
         aria-labelledby="why-join-heading"
       >
-        <div className="w-full">
+        <div className="w-full px-3 sm:px-4 md:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
             <h2
               id="why-join-heading"
-              className="text-3xl md:text-5xl font-bold mb-6"
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 md:mb-6"
               style={{
                 fontFamily: "Outfit, sans-serif",
-                fontSize: "clamp(32px, 6vw, 48px)",
+                fontSize: "clamp(20px, 6vw, 48px)",
                 color: "var(--black)",
                 textTransform: "capitalize",
                 wordBreak: "normal",
@@ -174,7 +172,7 @@ export const WhyJoinSection = () => {
             >
               Why Join Seerah Saathi?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-2 sm:px-4">
               Seerah Saathi offers a unique spiritual experience that combines guided Umrah with exclusive Seerah site
               visits, creating a transformational journey for your heart and mind.
             </p>
@@ -182,14 +180,14 @@ export const WhyJoinSection = () => {
 
           {/* Timeline */}
           <div className="relative max-w-6xl mx-auto">
-            {/* Timeline line */}
+            {/* Timeline line - reduced width from w-1 to w-px for thinnest possible line */}
             <div
-              className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-600 to-blue-700 hidden md:block"
+              className="absolute left-1/2 transform -translate-x-1/2 w-px h-full bg-gradient-to-b from-blue-600 to-blue-700 hidden lg:block"
               aria-hidden="true"
             ></div>
 
             {/* Timeline items */}
-            <div className="space-y-16">
+            <div className="space-y-6 sm:space-y-8 md:space-y-12 lg:space-y-16">
               <AnimatePresence>
                 {timelineItems.map((item, index) => (
                   <motion.div
@@ -203,22 +201,22 @@ export const WhyJoinSection = () => {
                   >
                     {/* Timeline Point - Hidden by default, glows on hover */}
                     <div
-                      className={`absolute left-1/2 top-8 w-[42px] h-[42px] rounded-full border-4 border-white shadow-lg transform -translate-x-1/2 z-20 hidden lg:flex items-center justify-center transition-all duration-300 ${
+                      className={`absolute left-1/2 top-6 sm:top-8 w-8 h-8 sm:w-10 sm:h-10 lg:w-[42px] lg:h-[42px] rounded-full border-2 sm:border-4 border-white shadow-lg transform -translate-x-1/2 z-20 hidden lg:flex items-center justify-center transition-all duration-300 ${
                         hoveredIndex === index
                           ? "bg-gradient-to-r from-blue-600 to-blue-700 shadow-blue-400 shadow-2xl scale-110"
                           : "bg-gray-300 opacity-50"
                       }`}
-                    >
-                      {/* Empty - no visible number */}
-                    </div>
+                    ></div>
 
                     {/* Timeline Card */}
-                    <div className={`grid lg:grid-cols-2 gap-0 ${index % 2 === 0 ? "" : "lg:grid-flow-col-dense"}`}>
+                    <div
+                      className={`grid grid-cols-1 lg:grid-cols-2 gap-0 ${index % 2 === 0 ? "" : "lg:grid-flow-col-dense"}`}
+                    >
                       {/* Card Content */}
                       <Card
-                        className={`group cursor-pointer transition-all duration-300 border-2 border-transparent ${index % 2 === 0 ? "lg:mr-8" : "lg:ml-8 lg:col-start-2"} ${
+                        className={`group cursor-pointer transition-all duration-300 border-2 border-transparent mx-2 sm:mx-0 ${index % 2 === 0 ? "lg:mr-8" : "lg:ml-8 lg:col-start-2"} ${
                           hoveredIndex === index
-                            ? "shadow-xl scale-[1.02] border-blue-500 shadow-blue-300/50" // Adjusted border and shadow glow
+                            ? "shadow-xl scale-[1.02] border-blue-500 shadow-blue-300/50"
                             : "hover:shadow-xl hover:scale-[1.02]"
                         }`}
                         onClick={() => openTimelineModal(item)}
@@ -227,7 +225,7 @@ export const WhyJoinSection = () => {
                       >
                         <CardContent className="p-0 overflow-hidden rounded-xl">
                           {/* Image Section */}
-                          <div className="relative h-64 overflow-hidden">
+                          <div className="relative h-40 sm:h-48 md:h-56 lg:h-64 overflow-hidden">
                             <img
                               src={item.image || "/placeholder.svg"}
                               alt={item.title}
@@ -236,50 +234,56 @@ export const WhyJoinSection = () => {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
                             {/* Badges */}
-                            <div className="absolute top-4 left-4 right-4 flex justify-between">
-                              <Badge variant="secondary" className="bg-blue-600/90 text-white border-0">
-                                <MapPin className="w-3 h-3 mr-1" />
+                            <div className="absolute top-1.5 left-1.5 right-1.5 sm:top-2 sm:left-2 sm:right-2 md:top-4 md:left-4 md:right-4 flex flex-col xs:flex-row gap-1.5 sm:gap-2 xs:justify-between">
+                              <Badge
+                                variant="secondary"
+                                className="bg-blue-600/90 text-white border-0 text-xs sm:text-sm w-fit"
+                              >
+                                <MapPin className="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-1" />
                                 {item.location}
                               </Badge>
-                              <Badge variant="outline" className="bg-white/90 text-blue-700 border-blue-200">
-                                <Calendar className="w-3 h-3 mr-1" />
+                              <Badge
+                                variant="outline"
+                                className="bg-white/90 text-blue-700 border-blue-200 text-xs sm:text-sm w-fit"
+                              >
+                                <Calendar className="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-1" />
                                 {item.year}
                               </Badge>
                             </div>
 
                             {/* Timeline Number Mobile - Also responds to hover */}
-                            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 lg:hidden">
+                            <div className="absolute top-2 left-1/2 transform -translate-x-1/2 lg:hidden">
                               <div
-                                className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all duration-300 ${
+                                className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold transition-all duration-300 ${
                                   hoveredIndex === index
                                     ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-blue-400 shadow-lg scale-110"
                                     : "bg-gray-300 text-gray-600 opacity-50"
                                 }`}
-                              >
-                                {/* Empty - no visible number */}
-                              </div>
+                              ></div>
                             </div>
                           </div>
                           {/* Content Section */}
-                          <div className="p-8 space-y-6 bg-white">
+                          <div className="p-3 sm:p-4 md:p-6 lg:p-8 space-y-3 sm:space-y-4 md:space-y-6 bg-white">
                             <div>
-                              <h3 className="text-2xl md:text-3xl font-bold text-blue-900 mb-3 group-hover:text-blue-700 transition-colors">
+                              <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-blue-900 mb-1.5 sm:mb-2 md:mb-3 group-hover:text-blue-700 transition-colors">
                                 Chapter {index + 1}: {item.title}
                               </h3>
-                              <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                              <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
+                                {item.description}
+                              </p>
                             </div>
 
-                            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                              <h4 className="text-base font-semibold text-blue-800 mb-2 flex items-center gap-2">
+                            <div className="bg-blue-50 border border-blue-200 rounded-lg p-2.5 sm:p-3 md:p-4">
+                              <h4 className="text-xs sm:text-sm md:text-base font-semibold text-blue-800 mb-1.5 sm:mb-2 flex items-center gap-2">
                                 🎯 Experience Highlights
                               </h4>
-                              <p className="text-sm text-blue-900">{item.experience}</p>
+                              <p className="text-xs sm:text-sm text-blue-900">{item.experience}</p>
                             </div>
 
-                            <div className="flex items-center justify-between pt-4 border-t border-blue-100">
-                              <div className="text-sm text-gray-500">Click to explore this chapter</div>
-                              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-200 transition-colors">
-                                <span className="text-blue-600 text-lg">→</span>
+                            <div className="flex items-center justify-between pt-2.5 sm:pt-3 md:pt-4 border-t border-blue-100">
+                              <div className="text-xs sm:text-sm text-gray-500">Click to explore this chapter</div>
+                              <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+                                <span className="text-blue-600 text-xs sm:text-sm md:text-lg">→</span>
                               </div>
                             </div>
                           </div>
@@ -297,7 +301,7 @@ export const WhyJoinSection = () => {
 
           {/* Video Section */}
           <motion.div
-            className="mt-20 text-center"
+            className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 text-center px-2 sm:px-4"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -305,10 +309,10 @@ export const WhyJoinSection = () => {
           >
             <div className="max-w-5xl mx-auto">
               <h3
-                className="text-2xl font-bold mb-8"
+                className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8"
                 style={{
                   fontFamily: "Outfit, sans-serif",
-                  fontSize: "clamp(24px, 4vw, 36px)",
+                  fontSize: "clamp(20px, 4vw, 36px)",
                   color: "var(--black)",
                   textTransform: "capitalize",
                   wordBreak: "normal",
@@ -327,30 +331,29 @@ export const WhyJoinSection = () => {
               <div className="relative rounded-2xl overflow-hidden shadow-2xl hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-blue-100 to-purple-100 border border-blue-200">
                 <div className="aspect-video flex items-center justify-center">
                   <motion.button
-                    className="flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full text-white hover:scale-110 transition-transform shadow-lg"
+                    className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full text-white hover:scale-110 transition-transform shadow-lg"
                     whileHover={{ scale: 1.15, rotate: 360 }}
                     transition={{ duration: 0.4 }}
                     aria-label="Play video"
                   >
-                    <Play className="w-8 h-8 ml-1" />
+                    <Play className="w-6 h-6 sm:w-8 sm:h-8 ml-1" />
                   </motion.button>
                 </div>
               </div>
-              <p className="text-gray-600 mt-4 mb-8">
+              <p className="text-sm sm:text-base text-gray-600 mt-4 mb-6 sm:mb-8">
                 Watch this inspiring video to learn more about the Seerah Saathi experience
               </p>
-             
             </div>
           </motion.div>
 
           {/* Call to Action Section */}
-          <div className="text-center mt-24">
-            <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 md:p-12 text-white max-w-4xl mx-auto">
+          <div className="text-center mt-12 sm:mt-16 md:mt-20 lg:mt-24 px-2 sm:px-4">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12 text-white max-w-4xl mx-auto">
               <h3
-                className="text-3xl md:text-4xl font-bold mb-4"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 md:mb-6"
                 style={{
                   fontFamily: "Outfit, sans-serif",
-                  fontSize: "clamp(28px, 5vw, 42px)",
+                  fontSize: "clamp(24px, 5vw, 42px)",
                   color: "white",
                   textTransform: "capitalize",
                   wordBreak: "normal",
@@ -361,13 +364,13 @@ export const WhyJoinSection = () => {
               >
                 Begin Your Sacred Journey
               </h3>
-              <p className="text-lg mb-8 opacity-90 leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl opacity-90 leading-relaxed">
                 Join us on this transformative pilgrimage through Islamic history. Experience each chapter of the Seerah
                 with expert guides, authentic accommodations, and spiritual reflection.
               </p>
               <Button
                 onClick={() => setIsEmailModalOpen(true)}
-                 className="px-8 py-4 bg-white text-blue-700 font-semibold rounded-lg shadow-lg hover:bg-blue-50 hover:text-blue-700 border border-blue-700 hover:shadow-xl transition-all duration-300 hover:scale-105"
+                className="px-6 sm:px-8 py-3 sm:py-4 bg-white text-blue-700 font-semibold rounded-lg shadow-lg hover:bg-blue-50 hover:text-blue-700 border border-blue-700 hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm sm:text-base"
                 size="lg"
                 aria-label="Start your journey"
               >

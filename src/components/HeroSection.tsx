@@ -87,10 +87,10 @@ export const HeroSection = () => {
         aria-labelledby="hero-heading"
       >
         {/* Main Content */}
-        <div className="relative z-10 container mx-auto px-6 flex flex-col lg:flex-row items-center justify-between min-h-screen py-20 gap-20">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between min-h-screen py-12 sm:py-16 lg:py-20 gap-8 sm:gap-12 lg:gap-20">
           {/* Left: Enhanced Text Content */}
           <motion.div
-            className="w-full lg:w-1/2 text-left space-y-8"
+            className="w-full lg:w-1/2 text-center lg:text-left space-y-4 sm:space-y-6 lg:space-y-8"
             variants={titleVariants}
             initial="hidden"
             animate="visible"
@@ -99,10 +99,9 @@ export const HeroSection = () => {
             <motion.div className="relative">
               <motion.h1
                 id="hero-heading"
-                className="text-5xl md:text-6xl lg:text-7xl font-black leading-none tracking-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight sm:leading-none tracking-tight"
                 style={{
                   fontFamily: "Outfit, sans-serif",
-                  fontSize: "48px",
                   color: "var(--black)",
                   textTransform: "capitalize",
                   wordBreak: "normal",
@@ -114,7 +113,7 @@ export const HeroSection = () => {
                   backgroundClip: "text",
                   marginTop: 0,
                   marginBottom: 0,
-                  fontWeight:800,
+                  fontWeight: 800,
                 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -126,13 +125,12 @@ export const HeroSection = () => {
 
             {/* Subtitle with fade effect */}
             <motion.h2
-              className="text-2xl md:text-3xl lg:text-4xl font-bold relative"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold relative px-2 sm:px-0"
               variants={subtitleVariants}
               style={{
                 fontFamily: "Outfit, sans-serif",
                 fontWeight: "700",
                 textTransform: "capitalize",
-                fontSize: "clamp(24px, 4vw, 28px)",
               }}
             >
               <motion.span
@@ -147,11 +145,10 @@ export const HeroSection = () => {
             {/* Enhanced Description */}
             <motion.div variants={contentVariants} className="relative">
               <motion.p
-                className="text-lg md:text-xl max-w-2xl leading-relaxed font-medium"
+                className="text-base sm:text-lg md:text-xl max-w-2xl leading-relaxed font-medium mx-auto lg:mx-0 px-2 sm:px-0"
                 style={{
                   fontFamily: "Outfit, sans-serif",
                   color: "#333",
-                  fontSize: "18px",
                   fontWeight: "400",
                 }}
                 initial={{ opacity: 0 }}
@@ -183,11 +180,14 @@ export const HeroSection = () => {
             </motion.div>
 
             {/* Enhanced Buttons */}
-            <motion.div className="flex flex-col sm:flex-row gap-6 pt-8" variants={buttonVariants}>
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-6 sm:pt-8 justify-center lg:justify-start"
+              variants={buttonVariants}
+            >
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
                   onClick={() => setIsEmailModalOpen(true)}
-                  className="px-10 py-5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 text-lg relative overflow-hidden group"
+                  className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 text-base sm:text-lg relative overflow-hidden group"
                   aria-label="Join now"
                 >
                   <motion.div
@@ -201,7 +201,7 @@ export const HeroSection = () => {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
                   variant="outline"
-                  className="px-10 py-5 bg-white/80 backdrop-blur-sm border-2 border-blue-300 text-blue-700 hover:text-blue-800 hover:border-blue-400 hover:bg-blue-50/80 font-bold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl text-lg"
+                  className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-white/80 backdrop-blur-sm border-2 border-blue-300 text-blue-700 hover:text-blue-800 hover:border-blue-400 hover:bg-blue-50/80 font-bold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl text-base sm:text-lg"
                   aria-label="Download brochure"
                 >
                   Download Brochure
@@ -212,7 +212,7 @@ export const HeroSection = () => {
 
           {/* Right: Enhanced Hero Image */}
           <motion.div
-            className="w-full lg:w-1/2 mt-16 lg:mt-0 flex justify-center relative"
+            className="w-full lg:w-1/2 mt-8 sm:mt-12 lg:mt-0 flex justify-center relative order-first lg:order-last"
             variants={imageVariants}
             initial="hidden"
             animate="visible"
@@ -228,7 +228,7 @@ export const HeroSection = () => {
                 <motion.img
                   src={heroImage || "/placeholder.svg"}
                   alt="Sacred Kaaba - Center of Islamic pilgrimage"
-                  className="w-full max-w-lg rounded-3xl shadow-2xl object-cover border-4 border-white/90 relative z-10"
+                  className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg rounded-2xl sm:rounded-3xl shadow-2xl object-cover border-2 sm:border-4 border-white/90 relative z-10"
                   initial={{ filter: "brightness(0.8)" }}
                   animate={{ filter: "brightness(1)" }}
                   transition={{ duration: 1, delay: 0.5 }}
@@ -236,7 +236,7 @@ export const HeroSection = () => {
 
                 {/* Simple Border Effect */}
                 <motion.div
-                  className="absolute -inset-3 rounded-3xl border-2 border-blue-300/40 pointer-events-none"
+                  className="absolute -inset-2 sm:-inset-3 rounded-2xl sm:rounded-3xl border-2 border-blue-300/40 pointer-events-none"
                   animate={{
                     scale: [1, 1.02, 1],
                     opacity: [0.4, 0.6, 0.4],
@@ -254,17 +254,17 @@ export const HeroSection = () => {
 
         {/* Enhanced Scroll Indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+          className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-10 hidden sm:block"
           animate={{ y: [0, -12, 0] }}
           transition={{ repeat: Number.POSITIVE_INFINITY, duration: 3, ease: "easeInOut" }}
           aria-hidden="true"
         >
           <motion.div
-            className="w-7 h-12 border-2 border-blue-400/60 rounded-full flex justify-center bg-white/60 backdrop-blur-md shadow-lg"
+            className="w-6 sm:w-7 h-10 sm:h-12 border-2 border-blue-400/60 rounded-full flex justify-center bg-white/60 backdrop-blur-md shadow-lg"
             whileHover={{ scale: 1.1 }}
           >
             <motion.div
-              className="w-1.5 h-3 bg-gradient-to-b from-blue-500 to-blue-600 rounded-full mt-2"
+              className="w-1 sm:w-1.5 h-2 sm:h-3 bg-gradient-to-b from-blue-500 to-blue-600 rounded-full mt-2"
               animate={{
                 y: [0, 6, 0],
                 opacity: [1, 0.3, 1],
