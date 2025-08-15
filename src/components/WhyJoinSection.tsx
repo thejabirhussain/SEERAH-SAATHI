@@ -138,7 +138,53 @@ export const WhyJoinSection = () => {
   }
 
   return (
-    <>
+    <>          {/* Video Section */}
+          <motion.div
+            className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 text-center px-2 sm:px-4"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="max-w-5xl mx-auto">
+              <h3
+                className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8"
+                style={{
+                  fontFamily: "Outfit, sans-serif",
+                  fontSize: "clamp(20px, 4vw, 36px)",
+                  color: "var(--black)",
+                  textTransform: "capitalize",
+                  wordBreak: "normal",
+                  overflowWrap: "normal",
+                  WebkitTextFillColor: "transparent",
+                  mixBlendMode: "normal",
+                  backgroundImage: "linear-gradient(74deg, #0040c1, #679aff)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  marginTop: 0,
+                  marginBottom: "2rem",
+                }}
+              >
+                Discover the Sacred Journey
+              </h3>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-blue-100 to-purple-100 border border-blue-200">
+                <div className="aspect-video flex items-center justify-center">
+                  <motion.button
+                    className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full text-white hover:scale-110 transition-transform shadow-lg"
+                    whileHover={{ scale: 1.15, rotate: 360 }}
+                    transition={{ duration: 0.4 }}
+                    aria-label="Play video"
+                  >
+                    <Play className="w-6 h-6 sm:w-8 sm:h-8 ml-1" />
+                  </motion.button>
+                </div>
+              </div>
+              <p className="text-sm sm:text-base text-gray-600 mt-4 mb-6 sm:mb-8">
+                Watch this inspiring video to learn more about the Seerah Saathi experience
+              </p>
+            </div>
+          </motion.div>
+          
       <motion.section
         id="about"
         className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 bg-gradient-to-br from-blue-50 via-purple-50 to-blue-100 overflow-hidden"
@@ -299,52 +345,7 @@ export const WhyJoinSection = () => {
             </div>
           </div>
 
-          {/* Video Section */}
-          <motion.div
-            className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 text-center px-2 sm:px-4"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="max-w-5xl mx-auto">
-              <h3
-                className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8"
-                style={{
-                  fontFamily: "Outfit, sans-serif",
-                  fontSize: "clamp(20px, 4vw, 36px)",
-                  color: "var(--black)",
-                  textTransform: "capitalize",
-                  wordBreak: "normal",
-                  overflowWrap: "normal",
-                  WebkitTextFillColor: "transparent",
-                  mixBlendMode: "normal",
-                  backgroundImage: "linear-gradient(74deg, #0040c1, #679aff)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  marginTop: 0,
-                  marginBottom: "2rem",
-                }}
-              >
-                Discover the Sacred Journey
-              </h3>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-blue-100 to-purple-100 border border-blue-200">
-                <div className="aspect-video flex items-center justify-center">
-                  <motion.button
-                    className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full text-white hover:scale-110 transition-transform shadow-lg"
-                    whileHover={{ scale: 1.15, rotate: 360 }}
-                    transition={{ duration: 0.4 }}
-                    aria-label="Play video"
-                  >
-                    <Play className="w-6 h-6 sm:w-8 sm:h-8 ml-1" />
-                  </motion.button>
-                </div>
-              </div>
-              <p className="text-sm sm:text-base text-gray-600 mt-4 mb-6 sm:mb-8">
-                Watch this inspiring video to learn more about the Seerah Saathi experience
-              </p>
-            </div>
-          </motion.div>
+
 
           {/* Call to Action Section */}
           <div className="text-center mt-12 sm:mt-16 md:mt-20 lg:mt-24 px-2 sm:px-4">
